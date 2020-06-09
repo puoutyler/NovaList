@@ -1,11 +1,44 @@
 import React, { Component } from "react";
 import "./style.css";
-import Form from './'
+import Form from '../form/form.js'
 
-class App extends Component {
-  render() {
-    return <div className="App">Hello World</div>;
+
+const App = (props) => {
+
+  const [book, setBook] = React.useState(null)
+
+  const [editBook, setEditBook] = React.useState({
+    title: '',
+    author: ''
+  })
+
+  const blank = {
+    title: '',
+    author: ''
   }
+
+  const getBooks = async () => {
+    const response = await fetch ('http://localhost:3000/novalist')
+    const result = await response.json()
+    console.log(result)
+    getBooks(result)
+  }
+  React.useEffect(() => {
+    getBooks()
+  }, [])
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 export default App;
