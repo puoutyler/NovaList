@@ -44,6 +44,10 @@ const App = (props) => {
     getBooks()
   }
 
+  const handleSelect = async (book) => {
+    setEditBook(book)
+  };
+
 
 
 
