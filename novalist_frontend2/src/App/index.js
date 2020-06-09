@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
 import Form from '../form/form.js'
 
@@ -21,6 +21,7 @@ const App = (props) => {
     const response = await fetch ('http://localhost:3000/novalist')
     const result = await response.json()
     console.log(result)
+    console.log(response)
     getBooks(result)
   }
   React.useEffect(() => {
@@ -35,6 +36,7 @@ const App = (props) => {
       },
       body: JSON.stringify(data)
     })
+    console.log(response)
     getBooks()
   }
 
@@ -46,13 +48,16 @@ const App = (props) => {
       },
       body: JSON.stringify(data)
     })
+    console.log(response)
     getBooks()
   }
 
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:3000/novalist/${id}`, {
       method: 'DELETE',
+      
     })
+    console.log(response)
     getBooks()
   }
 
@@ -68,7 +73,7 @@ const App = (props) => {
     <div>
       <ul>
         {book
-          ? book.map((book) => {
+          ? book.map((novaList) => {
             return (
               <li key={novaList._id}>
                 <h1>{novaList.title}</h1>
