@@ -71,16 +71,20 @@ const App = (props) => {
         {book
           ? book.map((book) => {
             return (
+
               <li key={book._id}>
                 <h1>{book.title}</h1>
                 <h2>{book.author}</h2>
                 <button onClick= { () => {
                   handleDelete(book._id)
+
                 }}>
                   Delete
                 </button>
                 <button onClick= { () => {
+
                   handleSelect(book)
+
                 }}>
                   Edit
                 </button>
