@@ -60,6 +60,22 @@ const App = (props) => {
     setEditBook(book)
   };
 
+  return <div className="App">
+    <div className="App-nav">
+      <h1>NovaList</h1>
+    </div>
+    <p> Books I want to Read </p>
+ 
+  <div>
+    <h1>Add a book to your list</h1>
+    <Form initial={blank} handleSubmit = {handleCreate}/>
+    <h1>Edit Selected Book</h1>
+    <Form initial={editBook} handleSubmit={handleEdit}/>
+  </div>
+</div>
+
+  
+
 
 }
 
