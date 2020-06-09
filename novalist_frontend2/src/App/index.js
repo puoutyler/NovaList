@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
-import Form from '../form/form.js'
+import Form from '../form/index.js'
 
 
 const App = (props) => {
@@ -18,28 +18,29 @@ const App = (props) => {
   }
 
   const getBooks = async () => {
-    const response = await fetch ('http://localhost:3000/novalist')
+    const response = await fetch ('http://localhost:8000/novalist')
     const result = await response.json()
     console.log(result)
-    getBooks(result)
+    setBook(result)
   }
   React.useEffect(() => {
     getBooks()
   }, [])
 
   const handleCreate = async (data) => {
-    const response = await fetch('http://localhost:3000/novalist' , {
+    const response = await fetch('http://localhost:8000/novalist' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     })
-    getBooks()
+    console.log(response)
+    getBooks();
   }
 
   const handleEdit = async (data) => {
-    const response = await fetch('http://localhost:3000/novalist', {
+    const response = await fetch(`http://localhost:8000/novalist/${data._id}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -50,7 +51,7 @@ const App = (props) => {
   }
 
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:3000/novalist/${id}`, {
+    const response = await fetch(`http://localhost:8000/novalist/${id}`, {
       method: 'DELETE',
     })
     getBooks()
@@ -70,16 +71,20 @@ const App = (props) => {
         {book
           ? book.map((book) => {
             return (
-              <li key={novaList._id}>
-                <h1>{novaList.title}</h1>
-                <h2>{novaList.author}</h2>
+
+              <li key={book._id}>
+                <h1>{book.title}</h1>
+                <h2>{book.author}</h2>
                 <button onClick= { () => {
-                  handleDelete(novaList._id)
+                  handleDelete(book._id)
+
                 }}>
                   Delete
                 </button>
                 <button onClick= { () => {
-                  handleSelect(novaList)
+
+                  handleSelect(book)
+
                 }}>
                   Edit
                 </button>
@@ -103,3 +108,4 @@ const App = (props) => {
 }
 
 export default App;
+
