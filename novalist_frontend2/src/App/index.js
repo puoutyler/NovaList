@@ -27,7 +27,22 @@ const App = (props) => {
     getBooks()
   }, [])
 
-
+  const handleCreate = async (data) => {
+    const response = await fetch('http://localhost:3000/novalist' , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    getBooks()
+  }
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:3000/novalist/${id}`, {
+      method: 'DELETE',
+    })
+    getBooks()
+  }
 
 
 
