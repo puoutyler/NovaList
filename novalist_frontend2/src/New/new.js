@@ -8,7 +8,7 @@ export default (props) => {
     }, [props.initial]);
 
 
-    const handleChange = (event) => {
+    const handleCreate = async (event) => {
         setFormData({...formData, [event.target.name]: event.target.value})
     }
 
@@ -19,7 +19,7 @@ export default (props) => {
         name="title"
         value={formData.title}
         placeholder="Title"
-        onChange={handleChange}>
+        onChange={handleCreate}>
         </input>
 
         <input 
@@ -27,7 +27,7 @@ export default (props) => {
         name="author"
         value={formData.author}
         placeholder="Author"
-        onChange={handleChange}>
+        onChange={handleCreate}>
         </input>
 
         <button className="btn" onClick={() => {

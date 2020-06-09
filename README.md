@@ -1,4 +1,5 @@
 # NovaList
-Tom Walker
-Tyler Puou
 
+Tom Walker
+Cody Tyler
+Tyler Puou
