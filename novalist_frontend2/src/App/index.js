@@ -60,7 +60,6 @@ const App = (props) => {
     setEditBook(book)
   };
 
-
 }
 
 export default App;
