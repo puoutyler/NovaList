@@ -5,6 +5,8 @@ import Search from '../Search/index.js'
 import axios from 'axios'
 
 let newBooksArray = []
+console.log(newBooksArray)
+
 const App = (props) => {
   
   const [book, setBook] = React.useState(null)
@@ -30,14 +32,19 @@ const App = (props) => {
   }
   React.useEffect(() => {
     getBooks()
+    newBooks()
   }, [])
-
+  
+ 
   const newBooks = (async () => {
       const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log(response)
-      newBooksArray.push(response)
-      return response
-    })()
+      newBooksArray.push(response.data)
+      newBooksArray[0].items.map((newBook, index) => {
+        console.log('Books Array: '+ newBook.volumeInfo.title)
+      })
+  })
+
 
 
   const handleCreate = async (data) => {
@@ -83,12 +90,12 @@ const App = (props) => {
       <h1>NovaList</h1>
     </div>
     
-    <div className="App-new-books">
+    {/* <div className="App-new-books">
       {
-        [newBooksArray]
-        ? [newBooksArray].map((newBook) => {
+        [newBooks]
+        ? [newBooks].map((newBook, index) => {
           return (
-              <div>
+              <div key={index}>
                 <h1>{newBook.title}</h1>
                 <h1>{newBook.author}</h1>
               </div>
@@ -96,7 +103,8 @@ const App = (props) => {
           }) 
         : '' 
       }
-    </div>
+    </div> */}
+
 
     <p> Books I want to Read </p>
     <div>
@@ -133,7 +141,7 @@ const App = (props) => {
     <Form initial={blank} handleSubmit = {handleCreate}/>
     <h1>Edit Selected Book</h1>
     <Form initial={editBook} handleSubmit={handleEdit}/>
-    <Search />
+   
   </div>
 </div>
 
