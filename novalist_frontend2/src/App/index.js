@@ -41,9 +41,9 @@ const App = (props) => {
 
   const handleEdit = async (data) => {
     const response = await fetch(`http://localhost:8000/novalist/${data._id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     })
