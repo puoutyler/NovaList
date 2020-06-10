@@ -22,7 +22,7 @@ const App = (props) => {
     const result = await response.json()
     console.log(result)
     console.log(response)
-    getBooks(result)
+    setBook(result)
   }
   React.useEffect(() => {
     getBooks()
@@ -73,7 +73,7 @@ const App = (props) => {
     <div>
       <ul>
         {book
-          ? book.map((novaList) => {
+          ? book.map((book) => {
             return (
 
               <li key={book._id}>
