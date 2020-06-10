@@ -49,6 +49,7 @@ const App = (props) => {
     })
     getBooks()
   }
+  
 
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:8000/novalist/${id}`, {
