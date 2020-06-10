@@ -3,7 +3,7 @@ import "./style.css";
 import Form from '../form/index.js'
 import Search from '../Search/index.js'
 
-
+const newBooksArray = []
 const App = (props) => {
   
   const [book, setBook] = React.useState(null)
@@ -35,14 +35,15 @@ const App = (props) => {
     try {
       const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4')
       const response = await request.json()
-      
-      await books(response)
-      return(response)
+      await (response)
+      newBooksArray = (response)
+      console.log('New Books: ' + newBooksArray)
     } catch (error){
       console.error(error)
     }
   }
-  console.log(newBooks)
+  
+
 
   const handleCreate = async (data) => {
     const response = await fetch('http://localhost:8000/novalist' , {
@@ -87,20 +88,20 @@ const App = (props) => {
       <h1>NovaList</h1>
     </div>
     
-    <div className="App-new-books">
-      {newBooks 
-      ? newBooks.map((newBook) => {
-        return (
-          <div>
-            <h1>{newBook.title}</h1>
-            <h1>{newBook.author}</h1>
-          </div>
-        )
-      }) 
-      : ''
-    }
-    </div>
-
+    {/* <div className="App-new-books">
+      {
+        newBooksArray 
+        ? newBooksArray.map((newBook) => {
+          return (
+              <div>
+                <h1>{newBook.title}</h1>
+                <h1>{newBook.author}</h1>
+              </div>
+            )
+          }) 
+        : '' 
+      }
+    </div> */}
     <p> Books I want to Read </p>
     <div>
       <ul>
