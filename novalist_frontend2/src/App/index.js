@@ -21,12 +21,8 @@ const App = (props) => {
     const response = await fetch ('http://localhost:8000/novalist')
     const result = await response.json()
     console.log(result)
-<<<<<<< HEAD
     console.log(response)
     getBooks(result)
-=======
-    setBook(result)
->>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
   }
   React.useEffect(() => {
     getBooks()
@@ -41,11 +37,7 @@ const App = (props) => {
       body: JSON.stringify(data)
     })
     console.log(response)
-<<<<<<< HEAD
     getBooks()
-=======
-    getBooks();
->>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
   }
 
   const handleEdit = async (data) => {
@@ -121,16 +113,6 @@ const App = (props) => {
 
 export default App;
 
-<<<<<<< HEAD
 
 
 
-{/* <div>
-      <h1>Edit a book from your list: </h1>
-      <Form initial={blank} handleSubmit ={handleEdit} />
-      <h1>Edit Selected Book</h1>
-      <Form initial={editBook}
-      handleSubmit={handleEdit} />
-</div> */}
-=======
->>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
