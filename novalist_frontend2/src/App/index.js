@@ -35,21 +35,14 @@ const App = (props) => {
     newBooks()
   }, [])
   
- 
   const newBooks = (async () => {
       const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log(response)
       response.data.items.map((item, index) => {
         newBooksArray.push(item)
       })
-      // newBooksArray.push(response.data.items)
       console.log('Console Test: ', newBooksArray)
-      // newBooksArray[0].items.map((newBook, index) => {
-      //   console.log('Books Array: '+ newBook.volumeInfo.title)
-      // })
   })
-
-
 
   const handleCreate = async (data) => {
     const response = await fetch('http://localhost:8000/novalist' , {
@@ -75,7 +68,6 @@ const App = (props) => {
     getBooks()
   }
   
-
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:8000/novalist/${id}`, {
       method: 'DELETE',
@@ -93,23 +85,21 @@ const App = (props) => {
     <div className="App-nav">
       <h1>NovaList</h1>
     </div>
-    
-   
+
+  {/* CURRENT WORKING AREA, API MAPPING AREA, DELETE THIS COMMENT WHEN DONE! */}
     <div>
       {newBooksArray.length < 5 ? newBooksArray.map((newBook, index) => {
         return (
                 <div key={index}>
-                  <h1>hello</h1>
+                  <h1>{newBook.volumeInfo.title}</h1>
                 </div>
-        )
-        }) 
+              )
+          }) 
         : <h1>Loading.</h1>
       } 
     </div>
-
-
-
-
+  {/* CURRENT WORKING AREA, API MAPPING AREA, DELETE THIS COMMENT WHEN DONE! */}
+  
     <p> Books I want to Read </p>
     <div>
       <ul>
