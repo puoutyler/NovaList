@@ -39,10 +39,14 @@ const App = (props) => {
   const newBooks = (async () => {
       const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log(response)
-      newBooksArray.push(response.data)
-      newBooksArray[0].items.map((newBook, index) => {
-        console.log('Books Array: '+ newBook.volumeInfo.title)
+      response.data.items.map((item, index) => {
+        newBooksArray.push(item)
       })
+      // newBooksArray.push(response.data.items)
+      console.log('Console Test: ', newBooksArray)
+      // newBooksArray[0].items.map((newBook, index) => {
+      //   console.log('Books Array: '+ newBook.volumeInfo.title)
+      // })
   })
 
 
@@ -90,20 +94,20 @@ const App = (props) => {
       <h1>NovaList</h1>
     </div>
     
-    {/* <div className="App-new-books">
-      {
-        [newBooks]
-        ? [newBooks].map((newBook, index) => {
-          return (
-              <div key={index}>
-                <h1>{newBook.title}</h1>
-                <h1>{newBook.author}</h1>
-              </div>
-            )
-          }) 
-        : '' 
-      }
-    </div> */}
+   
+    <div>
+      {newBooksArray.length < 5 ? newBooksArray.map((newBook, index) => {
+        return (
+                <div key={index}>
+                  <h1>hello</h1>
+                </div>
+        )
+        }) 
+        : <h1>Loading.</h1>
+      } 
+    </div>
+
+
 
 
     <p> Books I want to Read </p>
