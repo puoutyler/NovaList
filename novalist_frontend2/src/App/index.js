@@ -24,7 +24,7 @@ const App = (props) => {
     const response = await fetch ('http://localhost:8000/novalist')
     const result = await response.json()
     console.log(result)
-    console.log(response)
+    // console.log(response)
     setBook(result)
   }
   React.useEffect(() => {
@@ -35,7 +35,9 @@ const App = (props) => {
     try {
       const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4')
       const response = await request.json()
-      await books({response})
+      
+      await books(response)
+      return(response)
     } catch (error){
       console.error(error)
     }
@@ -84,6 +86,21 @@ const App = (props) => {
     <div className="App-nav">
       <h1>NovaList</h1>
     </div>
+    
+    <div className="App-new-books">
+      {newBooks 
+      ? newBooks.map((newBook) => {
+        return (
+          <div>
+            <h1>{newBook.title}</h1>
+            <h1>{newBook.author}</h1>
+          </div>
+        )
+      }) 
+      : ''
+    }
+    </div>
+
     <p> Books I want to Read </p>
     <div>
       <ul>
