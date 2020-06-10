@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import Form from '../form/index.js'
+import Search from '../Search/index.js'
 
 
 const App = (props) => {
@@ -11,6 +12,8 @@ const App = (props) => {
     title: '',
     author: ''
   })
+
+  const books = React.useState({})
 
   const blank = {
     title: '',
@@ -26,6 +29,17 @@ const App = (props) => {
   React.useEffect(() => {
     getBooks()
   }, [])
+
+  const newBooks = async () => {
+    try {
+      const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4')
+      const response = await request.json()
+      await books({response})
+    } catch (error){
+      console.error(error)
+    }
+  }
+  console.log(newBooks)
 
   const handleCreate = async (data) => {
     const response = await fetch('http://localhost:8000/novalist' , {
@@ -47,6 +61,7 @@ const App = (props) => {
       },
       body: JSON.stringify(data)
     })
+    console.log(response)
     getBooks()
   }
   
@@ -95,11 +110,13 @@ const App = (props) => {
           : 'LOADING...'}
       </ul>
     </div>
+  {/* <h2>{console.log(newBooks)}</h2> */}
   <div>
     <h1>Add a book to your list</h1>
     <Form initial={blank} handleSubmit = {handleCreate}/>
     <h1>Edit Selected Book</h1>
     <Form initial={editBook} handleSubmit={handleEdit}/>
+    <Search />
   </div>
 </div>
 
