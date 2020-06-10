@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import Form from '../form/form.js'
+import Form from '../form/index.js'
 
 
 const App = (props) => {
@@ -18,18 +18,22 @@ const App = (props) => {
   }
 
   const getBooks = async () => {
-    const response = await fetch ('http://localhost:3000/novalist')
+    const response = await fetch ('http://localhost:8000/novalist')
     const result = await response.json()
     console.log(result)
+<<<<<<< HEAD
     console.log(response)
     getBooks(result)
+=======
+    setBook(result)
+>>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
   }
   React.useEffect(() => {
     getBooks()
   }, [])
 
   const handleCreate = async (data) => {
-    const response = await fetch('http://localhost:3000/novalist' , {
+    const response = await fetch('http://localhost:8000/novalist' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,11 +41,15 @@ const App = (props) => {
       body: JSON.stringify(data)
     })
     console.log(response)
+<<<<<<< HEAD
     getBooks()
+=======
+    getBooks();
+>>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
   }
 
   const handleEdit = async (data) => {
-    const response = await fetch('http://localhost:3000/novalist', {
+    const response = await fetch(`http://localhost:8000/novalist/${data._id}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -53,7 +61,7 @@ const App = (props) => {
   }
 
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:3000/novalist/${id}`, {
+    const response = await fetch(`http://localhost:8000/novalist/${id}`, {
       method: 'DELETE',
       
     })
@@ -75,16 +83,20 @@ const App = (props) => {
         {book
           ? book.map((novaList) => {
             return (
-              <li key={novaList._id}>
-                <h1>{novaList.title}</h1>
-                <h2>{novaList.author}</h2>
+
+              <li key={book._id}>
+                <h1>{book.title}</h1>
+                <h2>{book.author}</h2>
                 <button onClick= { () => {
-                  handleDelete(novaList._id)
+                  handleDelete(book._id)
+
                 }}>
                   Delete
                 </button>
                 <button onClick= { () => {
-                  handleSelect(novaList)
+
+                  handleSelect(book)
+
                 }}>
                   Edit
                 </button>
@@ -109,6 +121,7 @@ const App = (props) => {
 
 export default App;
 
+<<<<<<< HEAD
 
 
 
@@ -119,3 +132,5 @@ export default App;
       <Form initial={editBook}
       handleSubmit={handleEdit} />
 </div> */}
+=======
+>>>>>>> 0b6e512dc4b72d15e72f18a9f335bd1caf87d924
