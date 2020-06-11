@@ -110,7 +110,7 @@ const App = (props) => {
           return (
                   <li key={index}>
                     <h1>{newBook.volumeInfo.title}</h1>
-                    <img alt="Google API Book Image" src={newBook.volumeInfo.imageLinks}></img>
+                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks}></img>
                     <p>{newBook.volumeInfo.description}</p>
                   </li>
                 )
