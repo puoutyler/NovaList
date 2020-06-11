@@ -1,4 +1,138 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css");
+// @import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css");
 
 
 
+
+.App_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none;
+    align-content: center;
+    
+    
+}
+
+.Api_container {
+    border: 1px solid black;
+    border-radius: 5px;
+    align-content: center;
+    
+}
+
+.Api_container2 {
+    border: 1px solid black;
+    border-radius: 5px;
+    align-content: center;
+    width: 100%;
+    padding: 20px;
+    
+}
+
+
+
+.API-li {
+    margin: 10px 5px;
+    text-decoration: none;
+    padding: 5px 15px;
+    box-shadow: 0px 0px 3px 3px black;
+    max-width: 200px;
+    margin-left:-20px;
+}
+
+// .search-container {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-content: center;
+//     padding: 20px;
+    
+// }
+
+.search {
+    align-content: center;
+    
+}
+
+.search-input {
+    height: 20px;
+    width: 300px;
+}
+
+.search-button {
+    height: 26px;
+    margin-left: 5px;
+    background-color: rgb(131, 131, 248);
+    cursor: pointer;
+}
+
+.search-button:hover {
+    opacity: 0.8;
+    transform: translateY(-.06rem);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+}
+
+.read-books-conatiner {
+    display : flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+.read-books-list-title {
+    text-align: center;
+
+}
+
+.read-books-list-div {
+    text-align: center;
+    list-style-type: none;
+    border: 1px solid black;
+    margin: 5px 5px;
+    padding: 0px 35px;
+}
+
+
+.book-title {
+    font-size: 18px;
+    text-align: center;
+}
+
+.book-author {
+    font-size: 14px;
+}
+
+
+.card-title {
+
+    
+}
+
+
+
+// .card-image2 {
+//     width: 100%;
+//     height: auto;
+//     max-height: 230px;
+// }
+
+.add-book-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.new-book-div {
+    
+}
+
+.edit-book-div {
+
+}
+
+// .edit-section {
+//     position: relative;
+//     left: 700px;
+//     bottom: 100px;
+// }
