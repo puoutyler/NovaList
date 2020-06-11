@@ -14,6 +14,8 @@ const App = (props) => {
   })
 
   const books = React.useState({})
+    
+
 
   const blank = {
     title: '',
@@ -33,13 +35,17 @@ const App = (props) => {
   const newBooks = async () => {
     try {
       const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4')
-      const response = await request.json()
-      await books({response})
+       const response = await request.json()
+      const result = await books(response)
     } catch (error){
       console.error(error)
     }
+    newBook();
   }
-  console.log(newBooks)
+  React.useEffect(() => {
+    newBooks()
+  }, [])
+  console.log()
 
   const handleCreate = async (data) => {
     const response = await fetch('http://localhost:8000/novalist' , {
@@ -83,6 +89,19 @@ const App = (props) => {
     </div>
     <p> Books I want to Read </p>
     <div>
+      <ul>
+        {books ? books.map((data)=>{
+          return(
+            <li>
+              <h2>{data.title}</h2>
+              
+          {/* <h2>{book.author}</h2>
+          <h2>{book.description}</h2> */}
+            </li>
+          )
+        } ) :'loading'}
+        
+      </ul>
       <ul>
         {book
           ? book.map((book) => {
