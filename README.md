@@ -9,5 +9,5 @@
 # An Application Developed By:
 Tom Walker, Tyler Puou, and Cody Scruggs
 
-
+This app lets you keep track of all the books you want to read. We allow a search from the google API to reccomend the newest books from any search term. 
 
