@@ -4,7 +4,7 @@
 import React from "react";
 import "./style.css";
 import Form from '../form/index.js'
-// import Search from '../Search/index.js'
+import Search from '../Search/index.js'
 
 // import Search from '../Search/index.js'
 import axios from 'axios'
@@ -170,7 +170,7 @@ const App = (props) => {
     <Form initial={blank} handleSubmit = {handleCreate}/>
     <h1>Edit Selected Book</h1>
     <Form initial={editBook} handleSubmit={handleEdit}/>
-    {/* <Search /> */}
+    <Search />
   </div>
 </div>
 }
