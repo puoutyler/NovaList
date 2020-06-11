@@ -1,10 +1,19 @@
 import React from 'react';
+import axios from 'axios'
 
 export default (props) => {
     const [formData, setFormData] = React.useState(props.initial)
 
-    const [book, setBook] = React.useState({})
-    const [result, setResult] = React.useState("")
+    const [book, setBook] = React.useState("")
+    const [results, setResults] = React.useState("")
+
+    const books = React.useState({})
+
+    const [apiBooks, setAPIBooks] = React.useState([])
+    const blank = {
+        title: '', 
+        author: ''
+    }
 
     React.useEffect(() =>{
         setFormData(props.initial);
@@ -12,37 +21,45 @@ export default (props) => {
 
 
     const handleChange = (event) => {
-        setFormData({...formData, [event.target.name]: event.target.value})
+        const book = event.target.value
+
+        setBook(book)
     }
 
     const onSubmit = async () => {
-        try {
-          const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=fiction&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
-          const response = await request.json()
-          await setBook([response])
-        } catch (error){
-          console.error(error)
-        }
-        return book
-      }
-
+        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5`)
+        console.log('New Books From API: ', response)
+        setResults(response.data.items)
+    }
     return (
         <div>
 
-        <button className="btn" onClick={() => {
-            onSubmit(formData);
-            setFormData(props.initial);
-        }}>
-            New Book
-        </button>
-        <ul>
-            {book ? book.map(book => (
-                <li>
-                <img src = {book.volueInfo.imageLinks.thumbnail}/>
-                </li>
-            ))
-            : 'LOADING'}
-        </ul>
+            <input 
+                type="text"
+                name="search"
+                placeholder="Search"
+                onChange={handleChange}>
+            </input>
+
+            <button className="btn" onClick={() => {
+                onSubmit(book);
+                setFormData(props.initial);
+            }}>
+                Search Books
+            </button>
+            <div>
+            <ul>
+                {results ? results.map((book, index) => {
+                    return (
+                        <li key={index}>
+                        <h1>{book.volumeInfo.title}</h1>
+                        <img alt="Google API Image" src={book.volumeInfo.imageLinks.smallThumbnail}></img>
+                        <p>{book.volumeInfo.description}</p>
+                    </li>
+                    )}) 
+                : 'LOADING...'} 
+            </ul>
+        </div>
         </div>
     )
 }
