@@ -3,7 +3,7 @@ import React from 'react';
 export default (props) => {
     const [formData, setFormData] = React.useState(props.initial)
 
-    const [book, setBook] = React.useState("")
+    const [book, setBook] = React.useState({})
     const [result, setResult] = React.useState("")
 
     React.useEffect(() =>{
@@ -17,12 +17,13 @@ export default (props) => {
 
     const onSubmit = async () => {
         try {
-          const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
+          const request = await fetch('https://www.googleapis.com/books/v1/volumes?q=fiction&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
           const response = await request.json()
-          console.log(response)
+          await setBook([response])
         } catch (error){
           console.error(error)
         }
+        return book
       }
 
     return (
@@ -34,7 +35,14 @@ export default (props) => {
         }}>
             New Book
         </button>
-
+        <ul>
+            {book ? book.map(book => (
+                <li>
+                <img src = {book.volueInfo.imageLinks.thumbnail}/>
+                </li>
+            ))
+            : 'LOADING'}
+        </ul>
         </div>
     )
 }
