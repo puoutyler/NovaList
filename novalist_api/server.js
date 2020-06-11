@@ -4,9 +4,9 @@ const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-app.get('/', (req, res) => {
-    res.send('Hello World')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello World')
+// })
 
 //GLOBALS
 const PORT = process.env.PORT || 8000
