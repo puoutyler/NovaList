@@ -34,7 +34,7 @@ export default (props) => {
             props.handleSubmit(formData);
             setFormData(props.initial);
         }}>
-            Add Book
+            Submit
         </button>
 
         </div>

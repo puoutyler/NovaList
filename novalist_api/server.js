@@ -9,7 +9,7 @@ const cors = require('cors')
 // })
 
 //GLOBALS
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 const novalistController = require('./controllers/novalist.js')
 const db = mongoose.connection
 const MONGODB_URI = process.env.MONGODB_URL || 'mongodb://localhost:27017/novalist'
