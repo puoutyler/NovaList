@@ -10,9 +10,9 @@ import axios from 'axios'
 
 const App = (props) => {
 
-  /////////////////////////
+  /////////////////////////-*
   //   SET/USE STATES
-  /////////////////////////
+  /////////////////////////-*
   const [book, setBook] = React.useState(null)
   const [editBook, setEditBook] = React.useState({
     title: '',
@@ -21,13 +21,13 @@ const App = (props) => {
   const books = React.useState({})
   const [apiBooks, setAPIBooks] = React.useState([])
   const blank = {
-    title: '',
+    title: '', 
     author: ''
   }
 
-  /////////////////////////
+  /////////////////////////-*
   //   GET BOOKS METHOD
-  /////////////////////////
+  /////////////////////////-*
   const getBooks = async () => {
     const response = await fetch ('http://localhost:8000/novalist')
     const result = await response.json()
@@ -35,26 +35,26 @@ const App = (props) => {
     setBook(result)
   }
 
-  /////////////////////////
+  /////////////////////////-*
   //     USE EFFECT
-  /////////////////////////
+  /////////////////////////-*
   React.useEffect(() => {
     getBooks()
     newBooks()
   }, [])
   
-  /////////////////////////
+  /////////////////////////-*
   //    NEW BOOKS ARRAY
-  /////////////////////////
+  /////////////////////////-*
   const newBooks = (async () => {
       const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log('New Books From API: ', response)
       setAPIBooks(response.data.items)
   })
 
-  /////////////////////////
+  /////////////////////////-*
   //    HANDLE CREATE
-  /////////////////////////
+  /////////////////////////-*
   const handleCreate = async (data) => {
     const response = await fetch('http://localhost:8000/novalist' , {
       method: 'POST',
@@ -67,9 +67,9 @@ const App = (props) => {
     getBooks()
   }
 
-  /////////////////////////
+  /////////////////////////-*
   //    HANDLE EDIT
-  /////////////////////////
+  /////////////////////////-*
   const handleEdit = async (data) => {
     const response = await fetch(`http://localhost:8000/novalist/${data._id}`, {
       method: 'PUT',
@@ -82,9 +82,9 @@ const App = (props) => {
     getBooks()
   }
   
-  /////////////////////////
+  /////////////////////////-*
   //    HANDLE DELETE
-  /////////////////////////
+  /////////////////////////-*
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:8000/novalist/${id}`, {
       method: 'DELETE',
@@ -94,9 +94,9 @@ const App = (props) => {
     getBooks()
   }
 
-  /////////////////////////
+  /////////////////////////-*
   //    HANDLE SELECT
-  /////////////////////////
+  /////////////////////////-*
   const handleSelect = async (book) => {
     setEditBook(book)
   };
@@ -159,9 +159,9 @@ const App = (props) => {
 </div>
 }
 
-/////////////////////////
+/////////////////////////-*
 //     EXPORT APP
-/////////////////////////
+/////////////////////////-*
 export default App;
 
 
