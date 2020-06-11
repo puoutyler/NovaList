@@ -6,5 +6,4 @@ const novaListSchema = Schema({
 })
 
 const novaList = model('novaList', novaListSchema)
-
 module.exports = novaList
