@@ -88,7 +88,6 @@ const App = (props) => {
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:8000/novalist/${id}`, {
       method: 'DELETE',
-      
     })
     console.log(response)
     getBooks()
@@ -100,12 +99,10 @@ const App = (props) => {
   const handleSelect = async (book) => {
     setEditBook(book)
   };
-
   return <div className="App">
     <div className="App-nav">
-      <h1>NovaList</h1>
+      <h1 className="App-title">NovaList</h1>
     </div>
-
   {/* GOOGLE API MAP BEGINS */}
     <div>
       <ul>
