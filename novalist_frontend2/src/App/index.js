@@ -47,7 +47,7 @@ const App = (props) => {
   //    NEW BOOKS ARRAY
   /////////////////////////-*
   const newBooks = (async () => {
-      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
+      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=programming&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log('New Books From API: ', response)
       setAPIBooks(response.data.items)
   })
@@ -110,7 +110,7 @@ const App = (props) => {
           return (
                   <li key={index}>
                     <h1>{newBook.volumeInfo.title}</h1>
-                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks}></img>
+                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail}></img>
                     <p>{newBook.volumeInfo.description}</p>
                   </li>
                 )
