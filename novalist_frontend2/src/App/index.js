@@ -4,7 +4,9 @@
 import React from "react";
 import "./style.css";
 import Form from '../form/index.js'
-import Search from '../Search/index.js'
+// import Search from '../Search/index.js'
+
+// import Search from '../Search/index.js'
 import axios from 'axios'
 //------------------------*
 
@@ -19,6 +21,9 @@ const App = (props) => {
     author: ''
   })
   const books = React.useState({})
+    
+
+
   const [apiBooks, setAPIBooks] = React.useState([])
   const blank = {
     title: '', 
@@ -47,7 +52,7 @@ const App = (props) => {
   //    NEW BOOKS ARRAY
   /////////////////////////-*
   const newBooks = (async () => {
-      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
+      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=science&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
       console.log('New Books From API: ', response)
       setAPIBooks(response.data.items)
   })
@@ -110,7 +115,7 @@ const App = (props) => {
           return (
                   <li key={index}>
                     <h1>{newBook.volumeInfo.title}</h1>
-                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks}></img>
+                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail}></img>
                     <p>{newBook.volumeInfo.description}</p>
                   </li>
                 )
@@ -123,6 +128,19 @@ const App = (props) => {
     <h1> Books I Want to Read </h1>
     {/* USER BOOK MAP BEGINS */}
     <div>
+      <ul>
+        {books ? books.map((data)=>{
+          return(
+            <li>
+              <h2>{data.title}</h2>
+              
+          {/* <h2>{book.author}</h2>
+          <h2>{book.description}</h2> */}
+            </li>
+          )
+        } ) :'loading'}
+        
+      </ul>
       <ul>
         {book
           ? book.map((book) => {
@@ -152,6 +170,7 @@ const App = (props) => {
     <Form initial={blank} handleSubmit = {handleCreate}/>
     <h1>Edit Selected Book</h1>
     <Form initial={editBook} handleSubmit={handleEdit}/>
+    {/* <Search /> */}
   </div>
 </div>
 }
