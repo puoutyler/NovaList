@@ -5,10 +5,10 @@ import React from "react";
 import "./style.css";
 import Form from '../form/index.js'
 // import Search from '../Search/index.js'
-
-// import Search from '../Search/index.js'
 import axios from 'axios'
-//------------------------*
+// import Nav from '../Nav/index.js'
+// import  {Router}  from "react-router-dom";
+
 
 const App = (props) => {
 
@@ -107,6 +107,7 @@ const App = (props) => {
   return <div className="App">
     <div className="App-nav">
       <h1 className="App-title">NovaList</h1>
+     
     </div>
   {/* GOOGLE API MAP BEGINS */}
     <div>
