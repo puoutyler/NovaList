@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import "../App/style.scss";
 
 export default (props) => {
     const [formData, setFormData] = React.useState(props.initial)
@@ -27,39 +28,47 @@ export default (props) => {
     }
 
     const onSubmit = async () => {
-        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5`)
+        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${book}&printType=books&intitle&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=6`)
         console.log('New Books From API: ', response)
         setResults(response.data.items)
     }
     return (
-        <div>
+        <div className="search">
 
             <input 
                 type="text"
                 name="search"
                 placeholder="Search"
-                onChange={handleChange}>
+                onChange={handleChange}
+                className="search-input"
+                placeholder="Search Books"
+                >
+                
             </input>
 
-            <button className="btn" onClick={() => {
+            <button className="search-button" onClick={() => {
                 onSubmit(book);
                 setFormData(props.initial);
             }}>
                 Search Books
             </button>
-            <div>
-            <ul>
-                {results ? results.map((book, index) => {
-                    return (
-                        <li key={index}>
-                        <h1>{book.volumeInfo.title}</h1>
-                        <img alt="Google API Image" src={book.volumeInfo.imageLinks.smallThumbnail}></img>
-                        <p>{book.volumeInfo.description}</p>
-                    </li>
-                    )}) 
-                : 'LOADING...'} 
-            </ul>
-        </div>
+
+            <div className="Api_container2">
+            
+                <ul className="App_row">
+                    {results ? results.map((book, index) => {
+                        return (
+                            <li key={index} className="API-li">
+                                 <a target="_blank" href={book.volumeInfo.canonicalVolumeLink}><img alt="Google API Image" src={book.volumeInfo.imageLinks.smallThumbnail} className="card-image2"/></a>
+                                
+                                <p className="card-content">Author: {book.volumeInfo.title}</p>
+                            </li>
+                        )}) 
+                    : ''} 
+                </ul>
+                
+            </div>
+
         </div>
     )
 }

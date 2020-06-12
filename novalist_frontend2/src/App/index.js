@@ -2,7 +2,7 @@
 //    IMPORTS
 /////////////////////////-*
 import React from "react";
-import "./style.css";
+import "./style.scss";
 import Form from '../form/index.js'
 import Search from '../Search/index.js'
 
@@ -52,7 +52,7 @@ const App = (props) => {
   //    NEW BOOKS ARRAY
   /////////////////////////-*
   const newBooks = (async () => {
-      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=science&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=5')
+      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=programming&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=6')
       console.log('New Books From API: ', response)
       setAPIBooks(response.data.items)
   })
@@ -107,71 +107,88 @@ const App = (props) => {
   return <div className="App">
     <div className="App-nav">
       <h1 className="App-title">NovaList</h1>
+      <h3 className="featured-header">Featured Books</h3>
     </div>
   {/* GOOGLE API MAP BEGINS */}
-    <div>
-      <ul>
+    <div className="Api_container">
+      <div>
+      <ul className="App_row">
         {apiBooks.map((newBook, index) => {
           return (
-                  <li key={index}>
-                    <h1>{newBook.volumeInfo.title}</h1>
-                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail}></img>
-                    <p>{newBook.volumeInfo.description}</p>
+                  <li key={index} className="API-li">
+                    {/* <h1 className="card-title">{newBook.volumeInfo.title}</h1> */}
+                    <a target="_blank" href={newBook.volumeInfo.canonicalVolumeLink}><img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail} className="card-image"/></a>
+                    <p className="card-content">Author: {newBook.volumeInfo.authors[0]}</p>
                   </li>
                 )
               } 
             ) 
           } 
       </ul>
+      </div>
     </div>
   {/* GOOGLE API MAP ENDS */}
-    <h1> Books I Want to Read </h1>
+    <div className="search-container">
+      <Search className="search"/>
+    </div>
+    <h1 className="read-books-list-title"> Books I Want to Read </h1>
     {/* USER BOOK MAP BEGINS */}
     <div>
-      <ul>
-        {books ? books.map((data)=>{
-          return(
-            <li>
-              <h2>{data.title}</h2>
-              
-          {/* <h2>{book.author}</h2>
-          <h2>{book.description}</h2> */}
-            </li>
-          )
-        } ) :'loading'}
-        
-      </ul>
-      <ul>
-        {book
-          ? book.map((book) => {
-            return (
-              <li key={book._id}>
-                <h1>{book.title}</h1>
-                <h2>{book.author}</h2>
-                <button onClick= { () => {
-                  handleDelete(book._id)
-                }}>
-                  Delete
-                </button>
-                <button onClick= { () => {
-                  handleSelect(book)
-                }}>
-                  Edit
-                </button>
-              </li>
-            )
-          })
-          : 'LOADING...'}
-      </ul>
+    <div className="read-books-conatiner">
+        <ul>
+          {book
+            ? book.map((book) => {
+              return (
+                <li key={book._id} className="read-books-list-div">
+                  <h1 className="book-title">{book.title}</h1>
+                  <h2 className="book-author">{book.author}</h2>
+                  <button onClick= { () => {
+                    handleDelete(book._id)
+                  }}>
+                    Delete
+                  </button>
+                  <button onClick= { () => {
+                    handleSelect(book)
+                  }}>
+                    Edit
+                  </button>
+                </li>
+              )
+            })
+            : 'LOADING...'}
+        </ul>
+      </div>
     </div>
     {/* USER BOOK MAP ENDS */}
-  <div>
+
+    
+
+  <div className="add-book-div" >
+    <div className="new-book-div">
     <h1>Add a book to your list</h1>
-    <Form initial={blank} handleSubmit = {handleCreate}/>
+      <Form initial={blank} handleSubmit = {handleCreate} />
+    </div>
+    <div className="edit-section">
+    <div className="edit-book-div">
     <h1>Edit Selected Book</h1>
-    <Form initial={editBook} handleSubmit={handleEdit}/>
-    <Search />
+      <Form initial={editBook} handleSubmit={handleEdit}/>
+    </div>
+    </div>
   </div>
+
+  <footer>
+    <h2>Copyright 2020 TTC</h2>
+
+     <div className="social-icons">
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Facebook_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Tumblr5_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Instagram_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Linkedin2_svg-512.png" alt="social media links"/>
+    </div>
+
+  </footer>
+
+
 </div>
 }
 
