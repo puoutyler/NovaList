@@ -41,7 +41,7 @@ export default (props) => {
                 placeholder="Search"
                 onChange={handleChange}
                 className="search-input"
-                placeholder="Search Newest Reccomended Books"
+                placeholder="Search Books"
                 >
                 
             </input>
@@ -59,7 +59,7 @@ export default (props) => {
                     {results ? results.map((book, index) => {
                         return (
                             <li key={index} className="API-li">
-                                <img alt="Google API Image" src={book.volumeInfo.imageLinks.smallThumbnail} className="card-image2"/>
+                                 <a target="_blank" href={book.volumeInfo.canonicalVolumeLink}><img alt="Google API Image" src={book.volumeInfo.imageLinks.smallThumbnail} className="card-image2"/></a>
                                 
                                 <p className="card-content">Author: {book.volumeInfo.title}</p>
                             </li>

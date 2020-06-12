@@ -52,7 +52,7 @@ const App = (props) => {
   //    NEW BOOKS ARRAY
   /////////////////////////-*
   const newBooks = (async () => {
-      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=science&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=6')
+      const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=programming&orderBy=newest&key=AIzaSyAQNLb6ohAjiKiv_PIijuizvpZ1gOdSYz4&maxResults=6')
       console.log('New Books From API: ', response)
       setAPIBooks(response.data.items)
   })
@@ -107,6 +107,7 @@ const App = (props) => {
   return <div className="App">
     <div className="App-nav">
       <h1 className="App-title">NovaList</h1>
+      <h3 className="featured-header">Featured Books</h3>
     </div>
   {/* GOOGLE API MAP BEGINS */}
     <div className="Api_container">
@@ -116,7 +117,7 @@ const App = (props) => {
           return (
                   <li key={index} className="API-li">
                     {/* <h1 className="card-title">{newBook.volumeInfo.title}</h1> */}
-                    <img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail} className="card-image"/>
+                    <a target="_blank" href={newBook.volumeInfo.canonicalVolumeLink}><img alt="Google API Image" src={newBook.volumeInfo.imageLinks.smallThumbnail} className="card-image"/></a>
                     <p className="card-content">Author: {newBook.volumeInfo.authors[0]}</p>
                   </li>
                 )
@@ -174,6 +175,20 @@ const App = (props) => {
     </div>
     </div>
   </div>
+
+  <footer>
+    <h2>Copyright 2020 TTC</h2>
+
+     <div className="social-icons">
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Facebook_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Tumblr5_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Instagram_svg-512.png" alt="social media links"/>
+      <img className="social" src="https://cdn1.iconfinder.com/data/icons/social-media-rounded-corners/512/Rounded_Linkedin2_svg-512.png" alt="social media links"/>
+    </div>
+
+  </footer>
+
+
 </div>
 }
 
